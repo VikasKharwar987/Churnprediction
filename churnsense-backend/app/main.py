@@ -90,12 +90,14 @@ async def upload_csv(
 
         prob, risk = predict_churn(customer_data)
 
+        prob = float(prob)
+
         db_customer = models.Customer(
-            user_id=current_user.id,   # 🔥 attach user
-            **customer_data,
-            churn_probability=prob,
-            risk_category=risk
-        )
+        user_id=current_user.id,
+        **customer_data,
+        churn_probability=prob,
+        risk_category=risk
+)
 
         db.add(db_customer)
         inserted_count += 1
